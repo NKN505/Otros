@@ -9,3 +9,12 @@ PASOS PARA LA SINCORNIZACION DE ESCENA UNITY+GITHUB
 	git commit -m "Actualización de escena"
 	git push origin main
 4b. Commit changes y push origin desde la aplicación de escritorio de GitHub. 
+
+5. En el ordenador de casa:
+Después de subir los cambios en el ordenador del trabajo, en tu ordenador de casa:
+
+	a. Abre Git Bash y navega hasta la carpeta de tu proyecto.
+
+	b. git pull origin main  # O la rama que estés utilizando.
+
+Si no hay conflictos, los cambios de la escena deberían estar ya disponibles en tu proyecto en el ordenador de casa.
