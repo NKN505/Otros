@@ -1,10 +1,10 @@
 PASOS PARA LA SINCORNIZACION DE ESCENA UNITY+GITHUB
 ---------------------------------------------------------------------------------------------------
 
-1. En CMD ejecutar manualmente el bash sync_scene.sh (en la ruta correspondiente: cd C:\RUTA...).
+1. En GitBash ejecutar manualmente el bash sync_scene.sh (en la ruta correspondiente: cd C:\RUTA...).
 2. Abrir el proyecto de Unity y trabajar en el.
 3. Al finalizar Ctrl+S.
-4a. Ejecutar lo siguiente en el CMD:
+4a. Ejecutar lo siguiente en el GitBash (se hace automaticamente con bash sync_scene.sh):
 	git add Assets/Scenes/ESCENA.unity
 	git commit -m "Actualización de escena"
 	git push origin main
