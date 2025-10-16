@@ -1,0 +1,381 @@
+<!DOCTYPE html><html lang="en" class="no-js">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<script type="text/javascript" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" charset="UTF-8" data-domain-script="6e91be4c-3145-4ea2-aa64-89d716064836" data-dLayer-ignore="true" data-document-language="true"></script><script type="text/javascript">function OptanonWrapper() {}</script><script>window.dataLayer = window.dataLayer || []; dataLayer.push({ event: 'dataLayer-initialized', user: { user_unity_id: undefined, user_logged_in: 'no' }, environment: { environment_locale: 'en-us', environment_currency: undefined }});</script><script>var offline=(location.href.indexOf('docs.unity3d.com')==-1)?true:false;if(!offline){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);  })(window,document,'script','dataLayer','GTM-5V25JL6');}</script><link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unity - Manual: Brush Inspector window reference</title>
+<meta property="og:image" content="https://unity3d.com/files/images/ogimg.jpg">
+<meta name="author" content="Unity Technologies">
+<meta property="relative-path-to-manual" content="../../../">
+<meta property="version-switcher-versions-with-this-page" content="Versions with this page:">
+<meta property="version-switcher-versions-without-this-page" content="Versions without this page:">
+<meta property="version-switcher-supported" content="Supported">
+<meta property="version-switcher-legacy" content="Legacy">
+<link rel="shortcut icon" href="https://unity.com/themes/contrib/unity_base/images/favicons/favicon.ico">
+<link rel="icon" type="image/png" href="../../../../StaticFilesManual/images/favicons/favicon.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../../StaticFilesManual/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../../StaticFilesManual/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../../../StaticFilesManual/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../../StaticFilesManual/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../../StaticFilesManual/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon-precomposed" href="../../../../StaticFilesManual/images/favicons/apple-touch-icon.png">
+<link rel="canonical" href="https://docs.unity3d.com/6000.0/Documentation/Manual/tilemaps/tile-palettes/brushes/brush-inspector-reference.html">
+<meta name="msapplication-TileColor" content="#222c37">
+<meta name="msapplication-TileImage" content="../../../../StaticFilesManual/images/favicons/tileicon-144x144.png">
+<script type="text/javascript" src="/StaticFilesConfig/UnityVersionsInfo.js"></script><script type="text/javascript" src="../../../../StaticFilesManual/js/jquery.js?ts=20250522"></script><script type="text/javascript" src="../../../../StaticFilesManual/js/core.js?ts=20250522"></script><script type="text/javascript" src="../../../../StaticFilesManual/js/image-comp.js?ts=20250522"></script><script type="text/javascript" src="../../../docdata/toc.js?ts=20250522"></script><script type="text/javascript" src="../../../docdata/global_toc.js?ts=20250522"></script><link rel="stylesheet" type="text/css" href="../../../../StaticFilesManual/css/core.css?ts=20250522">
+<link rel="stylesheet" type="text/css" href="../../../../StaticFilesManual/css/icons.css?ts=20250522">
+<link rel="stylesheet" href="../../../../StaticFilesManual/css/prism.css">
+<script src="../../../../StaticFilesManual/js/prism.js"></script><script src="/StaticFilesConfig/feedback/feedback.js"></script><script src="../../../../StaticFilesManual/js/jquery.sidebar.min.js"></script><link rel="stylesheet" href="../../../../StaticFilesManual/css/mobileoptimisation.css">
+<script src="../../../../StaticFilesManual/js/mobileoptimisation.js"></script>
+</head>
+<body>
+<div id="DocsAnalyticsData" data-area="none" data-pagetype="manual"></div>
+<div class="header-wrapper">
+<div id="header" class="header"><div class="content">
+<div class="spacer"><div class="menu">
+<div id="nav-open" for="nav-input"><span></span></div>
+<div class="logo"><a aria-label="go to the homepage" href="https://docs.unity3d.com"></a></div>
+<div class="search-form"><form action="../../../30_search.html" method="get" class="apisearch">
+<input type="text" name="q" placeholder="Search manual..." autosave="Unity Reference" results="5" class="sbox field" id="q"><input type="submit" class="submit">
+</form></div>
+<ul>
+<li><a href="../Manual/index.html" class="selected">Manual</a></li>
+<li><a href="../ScriptReference/index.html">Scripting API</a></li>
+</ul>
+</div></div>
+<div class="more">
+<div class="filler"></div>
+<ul><li><a href="https://unity.com/">unity.com</a></li></ul>
+</div>
+</div></div>
+<div class="toolbar"><div class="content">
+<div class="toggle version-number" id="VersionNumber" data-target=".otherversionscontent">
+                                Version: <b>Unity 6.0</b> (6000.0)
+                                <div class="otherversionscontent" id="OtherVersionsContent" style="display: none;">
+<ul id="OtherVersionsContentUl"></ul>
+<div id="otherVersionsLegend"><ul>
+<li>
+<div id="supportedColour" class="legendBox"></div>Supported</li>
+<li>
+<div id="notFoundColour" class="legendBox"></div>Legacy</li>
+</ul></div>
+</div>
+<div id="VersionSwitcherArrow" class="arrow versionSwitcherArrow"></div>
+</div>
+<div class="lang-switcher"><div class="current toggle" data-target=".lang-list">
+<div class="lbl">Language
+:                <span class="b">English</span>
+</div>
+<div class="arrow"></div>
+<div class="lang-list" style="display:none;"><ul>
+<li><a href="/Manual/tilemaps/tile-palettes/brushes/brush-inspector-reference.html">English</a></li>
+<li><a href="/cn/current/Manual/tilemaps/tile-palettes/brushes/brush-inspector-reference.html">中文</a></li>
+<li><a href="/ja/current/Manual/tilemaps/tile-palettes/brushes/brush-inspector-reference.html">日本語</a></li>
+<li><a href="/kr/current/Manual/tilemaps/tile-palettes/brushes/brush-inspector-reference.html">한국어</a></li>
+</ul></div>
+</div></div>
+</div></div>
+<div class="mobileLogo"><a aria-label="go to the homepage" href="https://docs.unity3d.com"></a></div>
+</div>
+<div id="master-wrapper" class="master-wrapper clear">
+<div id="sidebar" class="sidebar"><div class="sidebar-wrap"><div class="content"><div class="sidebar-menu"><div class="toc" id="customScrollbar">
+<h2>Unity Manual</h2>
+<div class="search-form sidebar-search-form"><form action="30_search.html" method="get" class="apisearch">
+<input type="text" name="q" placeholder="Search manual..." autosave="Unity Reference" results="5" class="sbox field" id="q"><input type="submit" id="mobileSearchBtn" class="submit" value="Search">
+</form></div>
+<div class="toggle version-number sidebar-version-switcher" id="VersionNumber" data-target=".otherversionscontent"><form id="otherVersionsContentMobileForm"><div class="ui-field-contain">
+<label for="select-native-4">Version: Unity 6.0</label><select name="select-native-4" id="versionsSelectMobile"><option>Select a different version</option>
+<optgroup id="versionsWithThisPageMobile" label="Versions with this page"></optgroup>
+<optgroup id="versionsWithoutThisPageMobile" label="Versions without this page"></optgroup></select>
+</div></form></div>
+<div class="lang-switcher"><div class="current toggle" data-target=".lang-list">
+<div class="lbl">Language
+:                <span class="b">English</span>
+</div>
+<div class="arrow"></div>
+<div class="lang-list" style="display:none;"><ul>
+<li><a href="/Manual/tilemaps/tile-palettes/brushes/brush-inspector-reference.html">English</a></li>
+<li><a href="/cn/current/Manual/tilemaps/tile-palettes/brushes/brush-inspector-reference.html">中文</a></li>
+<li><a href="/ja/current/Manual/tilemaps/tile-palettes/brushes/brush-inspector-reference.html">日本語</a></li>
+<li><a href="/kr/current/Manual/tilemaps/tile-palettes/brushes/brush-inspector-reference.html">한국어</a></li>
+</ul></div>
+</div></div>
+</div></div></div></div></div>
+<div id="content-wrap" class="content-wrap"><div class="content-block"><div class="content">
+<div class="section">
+<div class="breadcrumbs clear"><ul>
+<li><a href="../../../working-in-unity.html">Working in Unity</a></li>
+<li><a href="../../../Unity2D.html">2D in Unity</a></li>
+<li><a href="../../../tilemaps/tilemaps-landing.html">Tilemaps in Unity</a></li>
+<li><a href="../../../tilemaps/tile-palettes/tile-palette-landing.html">Tile palettes</a></li>
+<li><a href="../../../tilemaps/tile-palettes/brushes/tile-palette-brushes-landing.html">Tile palette brushes</a></li>
+<li>Brush Inspector window reference</li>
+</ul></div>
+<div class="mb20"><div class="nextprev clear">
+<div class="icon tt left mr1" data-distance="-40|-30|top">
+<span class="prev"><a aria-label="go to the previous page" href="../../../tilemaps/tile-palettes/brushes/create-scriptable-brush.html"></a></span><div class="tip">Create a Scriptable Brush</div>
+</div>
+<div class="icon tt right" data-distance="-40|-30|top">
+<span class="next"><a aria-label="go to the next page" href="../../../tilemaps/tile-palettes/brushes/active-brush-shortcuts-reference.html"></a></span><div class="tip">Active brush shortcuts reference</div>
+</div>
+</div></div>
+<div id="_leavefeedback"></div>
+<h1>Brush Inspector window reference</h1>
+<!--BeginSwitchLink--><!--EndSwitchLink-->
+<div class="clear"></div>
+
+<p>You can use the Brush <span class="tooltip"><strong>Inspector</strong><span class="tooltiptext">A Unity window that displays information about the currently selected GameObject, asset or project settings, allowing you to inspect and edit the values. <a class="tooltipMoreInfoLink" href="../../../UsingTheInspector.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../../Glossary.html#Inspector">Glossary</a></span></span></span> to change the current <a href="./active-brush.html">active brush</a> and its properties. </p>
+
+<p>The <strong>Brush Inspector</strong> window is at the bottom of the <a href="../tile-palette-editor-reference.html">Tile Palette editor</a> window. To minimize or expand the <strong>Brush Inspector</strong>, select the <strong>Brush Inspector</strong> visibility toggle at the upper right corner of the window, or drag the edge of the <strong>Brush Inspector</strong> window.</p>
+
+<p>Select the brush type for the active brush from the dropdown menu from one of the available brushes provided by the <a href="https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@latest">2D Tilemap Extras package</a>.</p>
+
+<p>Refer to the <a href="https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@latest/index.html?subfolder=/manual/Brushes.html">Scriptable Brushes</a> documentation for more information on their specific properties and usage.</p>
+
+<table>
+<colgroup>
+<col style="text-align:left;">
+<col style="text-align:left;">
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Brush Type</th>
+	<th style="text-align:left;">Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;"><strong>Brush type dropdown</strong></td>
+	<td style="text-align:left;">Select the <a href="./active-brush.html">active brush</a>’s brush type from the available options.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong><a href="#default-brush-properties">Default Brush</a></strong></td>
+	<td style="text-align:left;">The default brush with the default properties.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong><a href="#gameobject-brush-properties">GameObject Brush</a></strong></td>
+	<td style="text-align:left;">Select this brush to instance, place and manipulate <span class="tooltip"><strong>GameObjects</strong><span class="tooltiptext">The fundamental object in Unity scenes, which can represent characters, props, scenery, cameras, waypoints, and more. A GameObject’s functionality is defined by the Components attached to it. <a class="tooltipMoreInfoLink" href="../../../class-GameObject.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../../Glossary.html#GameObject">Glossary</a></span></span></span> onto the <strong><span class="tooltip"><strong>Scene</strong><span class="tooltiptext">A Scene contains the environments and menus of your game. Think of each unique Scene file as a unique level. In each Scene, you place your environments, obstacles, and decorations, essentially designing and building your game in pieces. <a class="tooltipMoreInfoLink" href="../../../CreatingScenes.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../../Glossary.html#Scene">Glossary</a></span></span></span></strong> view.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong><a href="#group-brush-properties">Group Brush</a></strong></td>
+	<td style="text-align:left;">Select this brush to pick tiles which are grouped together according to their position and set properties.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong><a href="#random-brush-properties">Random Brush</a></strong></td>
+	<td style="text-align:left;">Select this brush to place random tiles onto a <span class="tooltip"><strong>tilemap</strong><span class="tooltiptext">A GameObject that allows you to quickly create 2D levels using tiles and a grid overlay. <a class="tooltipMoreInfoLink" href="../../../tilemaps/work-with-tilemaps/tilemap-reference.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../../Glossary.html#Tilemap">Glossary</a></span></span></span> from a <a href="https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@latest/index.html?subfolder=/manual/RandomBrush.html%23usage">Tile Set</a> you define. For more information about the brush and how to define a Tile Set, refer to the <a href="https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@latest/index.html?subfolder=/manual/RandomBrush.html">Random Brush</a> documentation in the <a href="https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@latest">2D Tilemap Extras package</a>.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong><a href="#line-brush-properties">Line Brush</a></strong></td>
+	<td style="text-align:left;">Select this brush to draw a line of tiles onto the tilemap.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Default Brush properties<a name="default-brush-properties"></a>
+</h2>
+
+<p>The following properties are visible by default when you select the <strong>Default Brush</strong>. Some properties are common to all brush types.</p>
+
+<table>
+<colgroup>
+<col style="text-align:left;">
+<col style="text-align:left;">
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Property</th>
+	<th style="text-align:left;">Function</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;"><strong>Script</strong></td>
+	<td style="text-align:left;">Displays the currently assigned script Asset that provides a fixed set of APIs for painting on Tilemaps. The default is the <a href="../../../../ScriptReference/GridBrushBase.html">GridBrush</a>. Users may use or create their own <a href="./create-scriptable-brush.html">Scriptable Brushes</a> which become available from the dropdown menu. The Script property updates to reflect the current active Brush.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Flood Fill Contiguous Only</strong></td>
+	<td style="text-align:left;">Enable this property to have the <a href="../tools/fill-area-with-flood-fill-tool.html">Flood Fill tool</a> only affect Tiles on a Tilemap which are both the same as the targeted Tile and are contiguous to each other from the targeted position. When disabled, Flood Fill will change all Tiles which are the same as the targeted Tile on a Tilemap regardless of their position. This only affects the Default Brush.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Lock Z Position</strong></td>
+	<td style="text-align:left;">Enable this property to change the z-position of the active Brush. Disable to prevent any changes to the current z-position of the active Brush.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Z Position</strong></td>
+	<td style="text-align:left;">Only available when <strong>Lock Z Position</strong> is disabled. Enter the desired z-axis value (only whole numbers) for this Brush when painting Tiles, which also adjusts the relative heights of Tiles on a <a href="../../work-with-tilemaps/isometric-tilemaps/create-isometric-tilemap.html">Z as Y Isometric Tilemap</a>. Refer to <a href="../../work-with-tilemaps/isometric-tilemaps/create-tile-palette-isometric-tilemap.html">Adjusting the Tile height in the Palette</a> for more information.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Reset</strong></td>
+	<td style="text-align:left;">Select to reset the z-position value back to zero.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>GameObject Brush properties <a name="gameobject-brush-properties"></a>
+</h2>
+
+<p>The following properties are visible only when you select the <strong>GameObject Brush</strong>. For more information about the brush and how to use it, refer to the <a href="https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@latest/index.html?subfolder=/manual/GameObjectBrush.html">GameObject Brush</a> documentation in the <a href="https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@latest">2D Tilemap Extras package</a>.</p>
+
+<table>
+<colgroup>
+<col style="text-align:left;">
+<col style="text-align:left;">
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Property</th>
+	<th style="text-align:left;">Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;"><strong>Cell</strong></td>
+	<td style="text-align:left;">Displays the positions and details of the element(s) contained in this brush in a linear array. This is non-interactable and you can’t change or add to the properties in this section.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Size</strong></td>
+	<td style="text-align:left;">Set the brush size by specifying the <strong>X</strong>, <strong>Y</strong>, and <strong>Z</strong> values in cells for each axis.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Pivot</strong></td>
+	<td style="text-align:left;">Set the pivot coordinates to define the brush’s rotation point.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Anchor</strong></td>
+	<td style="text-align:left;">Set the anchor coordinates of the cells that decide where in the cells the brush places GameObjects when you paint with it.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Group Brush properties <a name="group-brush-properties"></a>
+</h2>
+
+<p>The following properties are visible only when you select the <strong>Group Brush</strong>. For more information about the brush and how to use it, refer to the <a href="https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@latest/index.html?subfolder=/manual/GroupBrush.html">Group Brush</a> documentation in the <a href="https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@latest">2D Tilemap Extras package</a>.</p>
+
+<table>
+<colgroup>
+<col style="text-align:left;">
+<col style="text-align:left;">
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Property</th>
+	<th style="text-align:left;">Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;"><strong>Gap</strong></td>
+	<td style="text-align:left;">Set the brush’s search radius. The value you set specifies the number of cells along each axis the brush search will scan. The brush then repeats the scan from each selected tile until the <strong>Limit</strong> value is reached.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Limit</strong></td>
+	<td style="text-align:left;">Set the brush’s total range. The value you set specifies the number of cells around the initial picked position. The brush value represents the maximum number of cells from the point of origin that the brush search will scan.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Random Brush properties <a name="random-brush-properties"></a>
+</h2>
+
+<p>The following properties are visible only when you select the <strong>Random Brush</strong>. For more information about the brush and how to use and define <a href="https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@latest/index.html?subfolder=/manual/RandomBrush.html%23usage">Tile Sets</a>, refer to the <a href="https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@latest/index.html?subfolder=/manual/RandomBrush.html">Random Brush</a> documentation in the <a href="https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@latest">2D Tilemap Extras package</a>.</p>
+
+<table>
+<colgroup>
+<col style="text-align:left;">
+<col style="text-align:left;">
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Property</th>
+	<th style="text-align:left;">Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;"><strong>Pick Random Tiles</strong></td>
+	<td style="text-align:left;">Enable this property to pick the tiles from the current selection as a random Tile Set.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Add To Random Tiles</strong></td>
+	<td style="text-align:left;">Enable this property to add the picked Tile Sets to existing Tile Sets instead of replacing them.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Tile Set Size</strong></td>
+	<td style="text-align:left;">Set the size of the Tile Set that this brush paints.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Number of Tiles</strong></td>
+	<td style="text-align:left;">The number of Tile Sets that this brush paints.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Line Brush properties <a name="line-brush-properties"></a>
+</h2>
+
+<p>The following properties are visible only when you select the <strong>Line Brush</strong>. For more information about the brush and how to use it, refer to the <a href="https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@latest/index.html?subfolder=/manual/LineBrush.html">Line Brush</a> documentation in the <a href="https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@latest">2D Tilemap Extras package</a>.</p>
+
+<table>
+<colgroup>
+<col style="text-align:left;">
+<col style="text-align:left;">
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Property</th>
+	<th style="text-align:left;">Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;"><strong>Fill Gaps</strong></td>
+	<td style="text-align:left;">Enable to have Unity create orthogonal connections between all tiles that connect the start and end of the line painted.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Line Start</strong></td>
+	<td style="text-align:left;">Set the coordinates of the starting point of the line.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Additional resources</h2>
+
+<ul>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@latest">2D Tilemap Extras package</a></li>
+<li><a href="../tile-palette-editor-reference.html">Tile Palette editor reference</a></li>
+</ul>
+<div id="_content"></div>
+<div class="nextprev clear">
+<div class="icon tt left mr1" data-distance="-40|-30|top">
+<span class="prev"><a aria-label="go to the previous page" href="../../../tilemaps/tile-palettes/brushes/create-scriptable-brush.html"></a></span><div class="tip">Create a Scriptable Brush</div>
+</div>
+<div class="icon tt right" data-distance="-40|-30|top">
+<span class="next"><a aria-label="go to the next page" href="../../../tilemaps/tile-palettes/brushes/active-brush-shortcuts-reference.html"></a></span><div class="tip">Active brush shortcuts reference</div>
+</div>
+</div>
+</div>
+<div class="footer-wrapper"><div class="footer clear">
+<div class="copy">Copyright ©2005-2025 Unity Technologies. All rights reserved. Built from 6000.0.51f1 (c47cf1b4e3c3). Built on: 2025-05-22.</div>
+<div class="menu">
+<a href="https://learn.unity.com/">Tutorials</a><a href="https://answers.unity3d.com">Community Answers</a><a href="https://support.unity3d.com/hc/en-us">Knowledge Base</a><a href="https://forum.unity3d.com">Forums</a><a href="https://unity3d.com/asset-store">Asset Store</a><a href="https://docs.unity3d.com/Manual/TermsOfUse.html">Terms of use</a><a href="https://unity.com/legal">Legal</a><a href="https://unity.com/legal/privacy-policy">Privacy Policy</a><a href="https://unity.com/legal/cookie-policy">Cookies</a><a href="https://unity.com/legal/do-not-sell-my-personal-information">Do Not Sell or Share My Personal Information</a><div id="ot-sdk-btn-container"><a id="ot-sdk-btn" class="ot-sdk-show-settings" href="javascript:void(0);">Your Privacy Choices (Cookie Settings)</a></div>
+</div>
+</div></div>
+</div></div></div>
+</div>
+</body>
+</html>

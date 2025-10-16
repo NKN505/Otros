@@ -1,0 +1,275 @@
+///////////////////////////////////////////////////////////////////////
+//  SpeedTree8Common.cginc
+
+#ifndef SPEEDTREE8_COMMON_INCLUDED
+#define SPEEDTREE8_COMMON_INCLUDED
+
+#include "UnityCG.cginc"
+#include "UnityPBSLighting.cginc"
+#include "SpeedTreeShaderLibrary.cginc"
+
+#if defined(ENABLE_WIND) && !defined(_WINDQUALITY_NONE)
+    #define SPEEDTREE_Y_UP
+    #include "SpeedTreeWind.cginc"
+    UNITY_INSTANCING_BUFFER_START(STWind)
+        UNITY_DEFINE_INSTANCED_PROP(float, _GlobalWindTime)
+    UNITY_INSTANCING_BUFFER_END(STWind)
+#endif
+
+struct Input
+{
+    half2   uv_MainTex  : TEXCOORD0;
+    fixed4  color       : COLOR;
+
+    #ifdef EFFECT_BACKSIDE_NORMALS
+        fixed   facing      : VFACE;
+    #endif
+};
+
+sampler2D _MainTex;
+fixed4 _Color;
+int _TwoSided;
+
+#ifdef EFFECT_BUMP
+    sampler2D _BumpMap;
+#endif
+
+#ifdef EFFECT_EXTRA_TEX
+    sampler2D _ExtraTex;
+#else
+    half _Glossiness;
+    half _Metallic;
+#endif
+
+#ifdef EFFECT_HUE_VARIATION
+    half4 _HueVariationColor;
+#endif
+
+#ifdef EFFECT_BILLBOARD
+    half _BillboardShadowFade;
+#endif
+
+#ifdef EFFECT_SUBSURFACE
+    sampler2D _SubsurfaceTex;
+    fixed4 _SubsurfaceColor;
+    half _SubsurfaceIndirect;
+#endif
+
+#define GEOM_TYPE_BRANCH 0
+#define GEOM_TYPE_FROND 1
+#define GEOM_TYPE_LEAF 2
+#define GEOM_TYPE_FACINGLEAF 3
+
+
+///////////////////////////////////////////////////////////////////////
+//  OffsetSpeedTreeVertex
+
+void OffsetSpeedTreeVertex(inout appdata_full data, float lodValue)
+{
+    // smooth LOD
+    #if defined(LOD_FADE_PERCENTAGE) && !defined(EFFECT_BILLBOARD)
+        data.vertex.xyz = lerp(data.vertex.xyz, data.texcoord2.xyz, lodValue);
+    #endif
+
+    // determine vertex geom type
+    float geometryType = (int)(data.texcoord3.w + 0.25);
+    bool leafTwo = false;
+    if (geometryType > GEOM_TYPE_FACINGLEAF)
+    {
+        geometryType -= 2;
+        leafTwo = true;
+    }
+
+    // camera facing leaves
+    #if !defined(EFFECT_BILLBOARD)
+    if (geometryType == GEOM_TYPE_FACINGLEAF)
+    {
+        float3 anchor = float3(data.texcoord1.zw, data.texcoord2.w);
+        data.vertex.xyz = DoLeafFacing(data.vertex.xyz, anchor);
+    }
+    #endif
+
+    // wind
+    #if defined(ENABLE_WIND) && !defined(_WINDQUALITY_NONE)
+        float3 rotatedWindVector = TransformWindVectorFromWorldToLocalSpace(_ST_WindVector.xyz);
+        if(dot(rotatedWindVector,rotatedWindVector) < 1e-4)
+        {
+            return; // bail out if no wind data
+        }
+        float3 treePos = float3(unity_ObjectToWorld[0].w, unity_ObjectToWorld[1].w, unity_ObjectToWorld[2].w);
+        float3 windyPosition = data.vertex.xyz;
+
+        #ifndef EFFECT_BILLBOARD
+            // leaves
+            if (geometryType > GEOM_TYPE_FROND)
+            {
+                #if defined(_WINDQUALITY_FAST) || defined(_WINDQUALITY_BETTER) || defined(_WINDQUALITY_BEST)
+                    float3 anchor = float3(data.texcoord1.zw, data.texcoord2.w);
+                    #ifdef _WINDQUALITY_BEST
+                        bool bBestWind = true;
+                    #else
+                        bool bBestWind = false;
+                    #endif
+                    float leafWindTrigOffset = anchor.x + anchor.y;
+                    windyPosition = LeafWind(bBestWind, leafTwo, windyPosition, data.normal, data.texcoord3.x, anchor, data.texcoord3.y, data.texcoord3.z, leafWindTrigOffset, rotatedWindVector);
+                #endif
+            }
+
+            // frond wind
+            bool bPalmWind = false;
+            #ifdef _WINDQUALITY_PALM
+                bPalmWind = true;
+                if (geometryType == GEOM_TYPE_FROND)
+                {
+                    windyPosition = RippleFrond(windyPosition, data.normal, data.texcoord.x, data.texcoord.y, data.texcoord3.x, data.texcoord3.y, data.texcoord3.z);
+                }
+            #endif
+
+            // branch wind (applies to all 3D geometry)
+            #if defined(_WINDQUALITY_BETTER) || defined(_WINDQUALITY_BEST) || defined(_WINDQUALITY_PALM)
+                float3 rotatedBranchAnchor = normalize(mul(_ST_WindBranchAnchor.xyz, (float3x3)unity_ObjectToWorld)) * _ST_WindBranchAnchor.w;
+                windyPosition = BranchWind(bPalmWind, windyPosition, treePos, float4(data.texcoord.zw, 0, 0), rotatedWindVector, rotatedBranchAnchor);
+            #endif
+
+        #endif // !EFFECT_BILLBOARD
+
+        // global wind
+        float globalWindTime = _ST_WindGlobal.x;
+        #if defined(EFFECT_BILLBOARD) && defined(UNITY_INSTANCING_ENABLED)
+            globalWindTime += UNITY_ACCESS_INSTANCED_PROP(STWind, _GlobalWindTime);
+        #endif
+        windyPosition = GlobalWind(windyPosition, treePos, true, rotatedWindVector, globalWindTime);
+        data.vertex.xyz = windyPosition;
+    #endif
+}
+
+
+///////////////////////////////////////////////////////////////////////
+//  vertex program
+
+void SpeedTreeVert(inout appdata_full v)
+{
+    // handle speedtree wind and lod
+    OffsetSpeedTreeVertex(v, unity_LODFade.x);
+
+    float3 treePos = float3(unity_ObjectToWorld[0].w, unity_ObjectToWorld[1].w, unity_ObjectToWorld[2].w);
+
+    #if defined(EFFECT_BILLBOARD)
+
+    BillboardSeamCrossfade(v, treePos);
+
+    #endif
+
+    // color already contains (ao, ao, ao, blend)
+    // put hue variation amount in there
+    #ifdef EFFECT_HUE_VARIATION
+        float hueVariationAmount = frac(treePos.x + treePos.y + treePos.z);
+        v.color.g = saturate(hueVariationAmount * _HueVariationColor.a);
+    #endif
+}
+
+
+///////////////////////////////////////////////////////////////////////
+//  lighting function to add subsurface
+
+half4 LightingSpeedTreeSubsurface(inout SurfaceOutputStandard s, half3 viewDir, UnityGI gi)
+{
+    #ifdef EFFECT_SUBSURFACE
+        half fSubsurfaceRough = 0.7 - s.Smoothness * 0.5;
+        half fSubsurface = GGXTerm(clamp(-dot(gi.light.dir, viewDir), 0, 1), fSubsurfaceRough);
+
+        // put modulated subsurface back into emission
+        s.Emission *= (gi.indirect.diffuse * _SubsurfaceIndirect + gi.light.color * fSubsurface);
+    #endif
+
+    return LightingStandard(s, viewDir, gi);
+}
+
+void LightingSpeedTreeSubsurface_GI(inout SurfaceOutputStandard s, UnityGIInput data, inout UnityGI gi)
+{
+    #ifdef EFFECT_BILLBOARD
+        // fade off the shadows on billboards to avoid artifacts
+        data.atten = lerp(data.atten, 1.0, _BillboardShadowFade);
+    #endif
+
+    LightingStandard_GI(s, data, gi);
+}
+
+half4 LightingSpeedTreeSubsurface_Deferred(SurfaceOutputStandard s, half3 viewDir, UnityGI gi, out half4 outGBuffer0, out half4 outGBuffer1, out half4 outGBuffer2)
+{
+    // no light/shadow info in deferred, so stop subsurface
+    s.Emission = half3(0,0,0);
+
+    return LightingStandard_Deferred(s, viewDir, gi, outGBuffer0, outGBuffer1, outGBuffer2);
+}
+
+
+///////////////////////////////////////////////////////////////////////
+//  surface shader
+
+void SpeedTreeSurf(Input IN, inout SurfaceOutputStandard OUT)
+{
+    fixed4 color = tex2D(_MainTex, IN.uv_MainTex) * _Color;
+
+    // transparency
+    OUT.Alpha = color.a * IN.color.a;
+    clip(OUT.Alpha - 0.3333);
+
+    // color
+    OUT.Albedo = color.rgb;
+
+    // hue variation
+    #ifdef EFFECT_HUE_VARIATION
+        half3 shiftedColor = lerp(OUT.Albedo, _HueVariationColor.rgb, IN.color.g);
+
+        // preserve vibrance
+        half maxBase = max(OUT.Albedo.r, max(OUT.Albedo.g, OUT.Albedo.b));
+        half newMaxBase = max(shiftedColor.r, max(shiftedColor.g, shiftedColor.b));
+        maxBase /= newMaxBase;
+        maxBase = maxBase * 0.5f + 0.5f;
+        shiftedColor.rgb *= maxBase;
+
+        OUT.Albedo = saturate(shiftedColor);
+    #endif
+
+    // normal
+    #ifdef EFFECT_BUMP
+        OUT.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_MainTex));
+    #elif defined(EFFECT_BACKSIDE_NORMALS) || defined(EFFECT_BILLBOARD)
+        OUT.Normal = float3(0, 0, 1);
+    #endif
+
+    // flip normal on backsides
+    #ifdef EFFECT_BACKSIDE_NORMALS
+        if (IN.facing < 0.5)
+        {
+            OUT.Normal.z = -OUT.Normal.z;
+        }
+    #endif
+
+    // adjust billboard normals to improve GI and matching
+    #ifdef EFFECT_BILLBOARD
+        OUT.Normal.z *= 0.5;
+        OUT.Normal = normalize(OUT.Normal);
+    #endif
+
+    // extra
+    #ifdef EFFECT_EXTRA_TEX
+        fixed4 extra = tex2D(_ExtraTex, IN.uv_MainTex);
+        OUT.Smoothness = extra.r; // no slider is exposed when ExtraTex is not available, hence we skip the multiplication here
+        OUT.Metallic = extra.g;
+        OUT.Occlusion = extra.b * IN.color.r;
+    #else
+        OUT.Smoothness = _Glossiness;
+        OUT.Metallic = _Metallic;
+        OUT.Occlusion = IN.color.r;
+    #endif
+
+    // subsurface (hijack emissive)
+    #ifdef EFFECT_SUBSURFACE
+        OUT.Emission = tex2D(_SubsurfaceTex, IN.uv_MainTex) * _SubsurfaceColor;
+    #endif
+}
+
+
+#endif // SPEEDTREE8_COMMON_INCLUDED
